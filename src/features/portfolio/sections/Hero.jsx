@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { PROFILE_IMAGE_FALLBACK, PROFILE_IMAGE_SRC, SITE } from '@/constants/site'
+import { scrollToHash } from '@/lib/scrollToAnchor'
 
 const Hero = () => {
   const [imgSrc, setImgSrc] = useState(PROFILE_IMAGE_SRC)
@@ -21,7 +22,7 @@ const Hero = () => {
         <path d="M0 90C220 180 440 0 720 82C960 156 1180 36 1440 94V180H0Z" fill="var(--color-primary-soft)" />
       </svg>
       <div className="container hero-grid">
-        <article className="panel hero-shell" data-reveal>
+        <article className="hero-shell" data-reveal>
           <div className="hero-copy">
             <div className="hero-topline">
               <span className="eyebrow">{SITE.role}</span>
@@ -31,13 +32,27 @@ const Hero = () => {
             <p className="hero-lead">{SITE.heroLead}</p>
             <div className="hero-stack">React - Node.js - Express - MongoDB</div>
             <div className="hero-actions">
-              <a className="button button--primary" href="#work">
+              <a
+                className="button button--primary"
+                href="#work"
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToHash('#work')
+                }}
+              >
                 See my work
               </a>
               <a className="button button--secondary" href={SITE.resume} target="_blank" rel="noopener noreferrer">
                 Resume
               </a>
-              <a className="button button--ghost" href="#contact">
+              <a
+                className="button button--ghost"
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToHash('#contact')
+                }}
+              >
                 Let&apos;s talk
               </a>
             </div>
@@ -54,31 +69,19 @@ const Hero = () => {
           </div>
 
           <aside className="hero-side">
-            <section className="profile-card" aria-label="Profile">
-            <div className="profile-top">
-              <div>
-                <span className="profile-status">Profile</span>
-                <h2>{SITE.name}</h2>
-              </div>
-              <span className="eyebrow">Open to work</span>
-            </div>
-            <div className="photo-frame">
-              <span className="floating-badge">{SITE.role}</span>
-              <img
-                src={imgSrc}
-                alt={`${SITE.name} — portrait`}
-                width={640}
-                height={800}
-                loading="eager"
-                decoding="async"
-                onError={() => setImgSrc(PROFILE_IMAGE_FALLBACK)}
-              />
-              <div className="photo-note">
-                <strong>{SITE.name}</strong>
-                <span>{SITE.role}</span>
+            <div className="profile-card" aria-label="Profile photo">
+              <div className="photo-frame">
+                <img
+                  src={imgSrc}
+                  alt={`${SITE.name} — portrait`}
+                  width={640}
+                  height={800}
+                  loading="eager"
+                  decoding="async"
+                  onError={() => setImgSrc(PROFILE_IMAGE_FALLBACK)}
+                />
               </div>
             </div>
-            </section>
           </aside>
         </article>
       </div>

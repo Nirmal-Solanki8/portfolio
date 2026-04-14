@@ -77,3 +77,10 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover,
+  .panel:hover {
+    transform: none;
+  }
+}

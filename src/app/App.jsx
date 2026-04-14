@@ -4,6 +4,7 @@ import { SITE } from '@/constants/site'
 import SkipLink from '@/components/layout/SkipLink'
 import Header from '@/components/layout/Header/Header'
 import { About, Contact, Footer, Hero, Services, Skills, Work } from '@/features/portfolio'
+import { scrollToHash } from '@/lib/scrollToAnchor'
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -16,6 +17,13 @@ function App() {
 
   useEffect(() => {
     document.title = SITE.title
+  }, [])
+
+  useEffect(() => {
+    const { hash } = window.location
+    if (!hash || hash === '#') return
+    const run = () => scrollToHash(hash, { updateHistory: false, behavior: 'auto' })
+    requestAnimationFrame(() => requestAnimationFrame(run))
   }, [])
 
   return (

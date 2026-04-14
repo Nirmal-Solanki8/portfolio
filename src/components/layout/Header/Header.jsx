@@ -3,12 +3,14 @@ import { NAV_LINKS } from '@/constants/nav'
 import { SITE } from '@/constants/site'
 import { useTheme } from '@/context/useTheme'
 import BrandMark from '@/components/layout/BrandMark'
+import { scrollToHash } from '@/lib/scrollToAnchor'
 import './Header.css'
 
 const Header = () => {
   const { theme, toggle } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeHash, setActiveHash] = useState('')
   const navRef = useRef(null)
 
   useEffect(() => {
@@ -32,10 +34,37 @@ const Header = () => {
     return () => window.removeEventListener('keydown', onKey)
   }, [isOpen])
 
+  useEffect(() => {
+    const elements = NAV_LINKS.map((item) => document.getElementById(item.hash)).filter(Boolean)
+    if (!elements.length) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting)
+        if (!visible.length) return
+        const pick = visible.reduce((a, b) => (a.intersectionRatio >= b.intersectionRatio ? a : b))
+        setActiveHash(pick.target.id)
+      },
+      { threshold: [0, 0.08, 0.15, 0.22, 0.32, 0.45, 0.6], rootMargin: '-36% 0px -36% 0px' },
+    )
+
+    elements.forEach((el) => observer.observe(el))
+
+    const onScroll = () => {
+      if (window.scrollY < 80) setActiveHash('')
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
+
   const go = (e, hash) => {
     e.preventDefault()
-    const el = document.querySelector(hash)
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    scrollToHash(hash)
     setIsOpen(false)
   }
 
@@ -57,7 +86,13 @@ const Header = () => {
           aria-label="Primary"
         >
           {NAV_LINKS.map((item) => (
-            <a key={item.hash} href={`#${item.hash}`} onClick={(e) => go(e, `#${item.hash}`)}>
+            <a
+              key={item.hash}
+              href={`#${item.hash}`}
+              className={activeHash === item.hash ? 'is-active' : undefined}
+              aria-current={activeHash === item.hash ? 'location' : undefined}
+              onClick={(e) => go(e, `#${item.hash}`)}
+            >
               {item.label}
             </a>
           ))}

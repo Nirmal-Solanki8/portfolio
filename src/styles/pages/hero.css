@@ -29,17 +29,55 @@
 }
 
 .hero-shell {
+  position: relative;
   display: grid;
-  grid-template-columns: 1.08fr 0.92fr;
-  gap: var(--space-4);
-  padding: var(--space-4);
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-primary) 10%, transparent) 0%,
+    transparent 42%,
+    transparent 58%,
+    color-mix(in srgb, var(--color-blue) 8%, transparent) 100%
+  );
+  opacity: 0.55;
+}
+
+[data-theme='light'] .hero-shell {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    var(--shadow-sm);
 }
 
 .hero-copy {
-  padding: clamp(var(--space-4), 3vw, var(--space-6));
-  border: 1px solid var(--color-border);
-  border-radius: calc(var(--radius-xl) - 0.2rem);
-  background: linear-gradient(180deg, var(--color-surface-2), color-mix(in srgb, var(--color-surface) 90%, transparent));
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(var(--space-5), 4vw, var(--space-8)) clamp(var(--space-5), 4vw, var(--space-7));
+  border-right: 1px solid var(--color-border);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-surface-2) 88%, transparent),
+    color-mix(in srgb, var(--color-surface) 96%, transparent)
+  );
 }
 
 .hero-topline {
@@ -116,47 +154,37 @@
   font-size: var(--text-sm);
 }
 
-.profile-card {
-  padding: var(--space-3);
-  min-height: 100%;
-}
-
-.profile-top {
+.hero-side {
+  position: relative;
+  z-index: 1;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-3);
-  margin-bottom: var(--space-3);
+  flex-direction: column;
+  min-height: 0;
 }
 
-.profile-status {
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.profile-card h2 {
-  margin-top: 0.55rem;
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  line-height: 1;
+.profile-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(var(--space-4), 3vw, var(--space-6));
+  min-height: 100%;
 }
 
 .photo-frame {
   position: relative;
+  flex: 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  min-height: 23rem;
-  border: 1px solid var(--color-border);
+  min-height: 20rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 85%, var(--color-primary) 15%);
   background: var(--color-surface-offset);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .photo-frame img {
   width: 100%;
   height: 100%;
-  min-height: 23rem;
+  min-height: 20rem;
   object-fit: cover;
   transition: transform 0.45s var(--ease-smooth);
 }
@@ -165,38 +193,15 @@
   transform: scale(1.02);
 }
 
-.floating-badge {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  padding: 0.62rem 0.9rem;
-  border-radius: var(--radius-full);
-  background: rgba(16, 24, 40, 0.82);
-  color: #e2e8f0;
-  font-size: var(--text-xs);
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
-.photo-note {
-  position: absolute;
-  left: var(--space-4);
-  right: var(--space-4);
-  bottom: var(--space-4);
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
-  background: rgba(16, 24, 40, 0.74);
-  color: #f8fafc;
-}
-
-.photo-note span {
-  font-size: var(--text-sm);
-  color: #cbd5e1;
-}
-
 @media (max-width: 1024px) {
   .hero-shell {
     grid-template-columns: 1fr;
+  }
+
+  .hero-copy {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: clamp(var(--space-5), 4vw, var(--space-7));
   }
 }
 
@@ -205,14 +210,9 @@
     grid-template-columns: 1fr;
   }
 
-  .hero-shell {
-    padding: var(--space-2);
-    gap: var(--space-3);
-  }
-
   .photo-frame,
   .photo-frame img {
-    min-height: 21rem;
+    min-height: 18rem;
   }
 
   .hero-actions {

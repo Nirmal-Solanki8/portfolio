@@ -14,10 +14,11 @@ export function useRevealRoot() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
           }
         })
       },
-      { threshold: 0.14 },
+      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
     )
 
     els.forEach((el) => observer.observe(el))

@@ -1,4 +1,5 @@
 import { SITE } from '@/constants/site'
+import { scrollToHash } from '@/lib/scrollToAnchor'
 
 const Footer = () => {
   return (
@@ -7,7 +8,15 @@ const Footer = () => {
         <span>
           © {new Date().getFullYear()} {SITE.name} — portfolio.
         </span>
-        <a href="#top">Back to top</a>
+        <a
+          href="#top"
+          onClick={(e) => {
+            e.preventDefault()
+            scrollToHash('#top')
+          }}
+        >
+          Back to top
+        </a>
       </div>
     </footer>
   )

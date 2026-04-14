@@ -92,6 +92,20 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+.section,
+.site-main#content,
+.hero {
+  scroll-margin-top: calc(var(--header-offset) + var(--space-2));
+}
+
+@media (max-width: 1024px) {
+  .section,
+  .site-main#content,
+  .hero {
+    scroll-margin-top: var(--space-4);
+  }
+}
+
 .app {
   min-height: 100dvh;
   opacity: 0;
@@ -344,4 +358,49 @@ button {
   opacity: 0.55;
   cursor: not-allowed;
   transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .app {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  body::after {
+    animation: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  [data-reveal].visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .button {
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .button:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn.primary:hover,
+  .contact-submit:hover:not(:disabled) {
+    transform: none;
+  }
 }

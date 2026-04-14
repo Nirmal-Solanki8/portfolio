@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { FaCss3Alt, FaHtml5, FaJs, FaNodeJs, FaReact } from 'react-icons/fa'
 import { SiExpress, SiMongodb } from 'react-icons/si'
 
@@ -22,6 +22,8 @@ const MotionArticle = motion.article
 const MotionBar = motion.div
 
 const Skills = () => {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section className="section" id="skills">
       <div className="container">
@@ -39,8 +41,8 @@ const Skills = () => {
                   return (
                     <MotionArticle
                       key={skill.name}
-                      whileHover={{ y: -4, scale: 1.02 }}
-                      transition={{ duration: 0.2 }}
+                      whileHover={reduceMotion ? undefined : { y: -4, scale: 1.02 }}
+                      transition={{ duration: reduceMotion ? 0 : 0.2 }}
                       className="card skill-progress-card"
                     >
                       <div className="skill-head">
@@ -56,7 +58,7 @@ const Skills = () => {
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true, amount: 0.5 }}
-                          transition={{ duration: 0.9, ease: 'easeOut' }}
+                          transition={{ duration: reduceMotion ? 0 : 0.9, ease: 'easeOut' }}
                         />
                       </div>
 
