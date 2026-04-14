@@ -1,0 +1,12 @@
+﻿/* About page styles */
+.two-col { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: var(--space-4); }
+.story, .timeline-card { padding: var(--space-4); }
+.story h2 { margin-top: var(--space-3); font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.04; letter-spacing: -0.03em; }
+.story p, .timeline-item p { color: var(--color-text-muted); }
+.timeline-title { margin-bottom: var(--space-3); font-family: var(--font-display); font-size: var(--text-lg); line-height: 1; }
+.timeline { display: grid; gap: var(--space-4); }
+.timeline-item { display: grid; grid-template-columns: auto 1fr; gap: var(--space-4); align-items: start; }
+.timeline-mark { width: 0.85rem; height: 0.85rem; margin-top: 0.45rem; border-radius: 50%; background: var(--color-primary); box-shadow: 0 0 0 6px var(--color-primary-soft); flex-shrink: 0; }
+.timeline-item strong { display: block; margin-bottom: 0.35rem; }
+.timeline-item p { margin-top: 0.2rem; font-size: var(--text-sm); }
+@media (max-width: 1024px) { .two-col { grid-template-columns: 1fr; } }

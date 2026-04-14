@@ -1,0 +1,7 @@
+export { default as Hero } from '@/features/portfolio/sections/Hero'
+export { default as Skills } from '@/features/portfolio/sections/Skills'
+export { default as Work } from '@/features/portfolio/sections/Work'
+export { default as About } from '@/features/portfolio/sections/About'
+export { default as Services } from '@/features/portfolio/sections/Services'
+export { default as Contact } from '@/features/portfolio/sections/Contact'
+export { default as Footer } from '@/features/portfolio/sections/Footer'

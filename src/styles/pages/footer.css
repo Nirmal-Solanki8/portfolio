@@ -1,0 +1,5 @@
+﻿/* Footer page styles */
+.site-footer { padding-bottom: var(--space-8); color: var(--color-text-muted); }
+.footer-line { padding-top: var(--space-6); border-top: 1px solid var(--color-divider); display: flex; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.footer-line a { color: var(--color-primary); }
+@media (max-width: 720px) { .footer-line { flex-direction: column; align-items: flex-start; } }
