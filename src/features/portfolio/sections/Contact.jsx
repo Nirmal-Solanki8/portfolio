@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { postContact } from '@/lib/api'
-import { SITE } from '@/constants/site'
+import { SITE, SOCIAL_LINKS } from '@/constants/site'
 
 const Contact = () => {
   const [status, setStatus] = useState('idle')
@@ -48,6 +48,13 @@ const Contact = () => {
                 <a className="button button--ghost" href={SITE.resume} target="_blank" rel="noopener noreferrer">
                   Resume
                 </a>
+              </div>
+              <div className="contact-socials" aria-label="Social media links">
+                {SOCIAL_LINKS.map((social) => (
+                  <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer">
+                    {social.label}
+                  </a>
+                ))}
               </div>
             </div>
 

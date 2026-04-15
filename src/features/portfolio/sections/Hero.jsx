@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Send } from 'lucide-react'
 import { PROFILE_IMAGE_FALLBACK, PROFILE_IMAGE_SRC, SITE } from '@/constants/site'
 import { scrollToHash } from '@/lib/scrollToAnchor'
 
@@ -24,13 +25,15 @@ const Hero = () => {
       <div className="container hero-grid">
         <article className="hero-shell" data-reveal>
           <div className="hero-copy">
-            <div className="hero-topline">
-              <span className="eyebrow">{SITE.role}</span>
-              <span className="hero-status">Open to opportunities</span>
-            </div>
+            <p className="hero-badge" role="group" aria-label="Role and availability">
+              <span className="hero-badge__dot" aria-hidden="true" />
+              <span className="hero-badge__role">{SITE.role}</span>
+              <span className="hero-badge__divider" aria-hidden="true" />
+              <span className="hero-badge__status">Open to opportunities</span>
+            </p>
             <h1 id="hero-title">{SITE.heroHeadline}</h1>
             <p className="hero-lead">{SITE.heroLead}</p>
-            <div className="hero-stack">React - Node.js - Express - MongoDB</div>
+            <p className="hero-stack">{SITE.heroStack}</p>
             <div className="hero-actions">
               <a
                 className="button button--primary"
@@ -46,7 +49,7 @@ const Hero = () => {
                 Resume
               </a>
               <a
-                className="button button--ghost"
+                className="button button--ghost hero-cta-talk"
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault()
@@ -54,6 +57,7 @@ const Hero = () => {
                 }}
               >
                 Let&apos;s talk
+                <Send className="hero-cta-talk__icon" size={17} strokeWidth={2} aria-hidden />
               </a>
             </div>
             <div className="stats-row">

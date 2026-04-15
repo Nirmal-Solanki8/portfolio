@@ -10,23 +10,37 @@ export const SITE = {
   email: 'nirmalsolanki1432@gmail.com',
   github: 'https://github.com/dashboard',
   linkedin: 'https://www.linkedin.com/in/nirmal-solanki-b222b537a',
+  instagram: 'https://instagram.com/',
+  facebook: 'https://facebook.com/',
+  x: 'https://x.com/',
+  youtube: 'https://youtube.com/',
   resume: '/resume.pdf',
   heroHeadline: 'Designing and building modern, fast web experiences.',
   heroLead:
     "I'm a web developer focused on React, JavaScript, Node.js, and responsive UI. I build websites and web apps that are clean, performant, and production-ready.",
+  heroStack: 'React · Node.js · Express · MongoDB',
   aboutTitle: 'A web developer focused on useful products and polished UI.',
   aboutBody:
     'My core skills are HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and REST APIs. I focus on clean architecture, responsive design, and reliable user experience.',
 }
 
+export const SOCIAL_LINKS = [
+  { label: 'GitHub', href: SITE.github },
+  { label: 'LinkedIn', href: SITE.linkedin },
+  { label: 'Instagram', href: SITE.instagram },
+  { label: 'Facebook', href: SITE.facebook },
+  { label: 'X', href: SITE.x },
+  { label: 'YouTube', href: SITE.youtube },
+]
+
 export const SKILLS = [
   'HTML5',
   'CSS3',
-  'JavaScript (ES6+)',
+  'JavaScript',
   'React.js',
   'Node.js',
   'Express.js',
+  'REST APIs',
   'MongoDB',
-  'REST API',
   'Responsive UI',
 ]

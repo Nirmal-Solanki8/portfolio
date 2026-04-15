@@ -6,6 +6,7 @@
 .card,
 .panel {
   position: relative;
+  min-width: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   background: var(--color-surface);
@@ -52,15 +53,17 @@
   grid-template-columns: 0.85fr 1.15fr;
   gap: var(--space-4);
   align-items: end;
-  margin-bottom: var(--space-5);
+  margin-bottom: clamp(var(--space-6), 3.5vw, var(--space-10));
 }
 
 .section-head h2 {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  line-height: 1.02;
+  line-height: 1.05;
   letter-spacing: -0.04em;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
   background: linear-gradient(130deg, var(--color-text), color-mix(in srgb, var(--color-primary) 45%, var(--color-text)));
   -webkit-background-clip: text;
   background-clip: text;
@@ -75,6 +78,18 @@
 @media (max-width: 1024px) {
   .section-head {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .section-head {
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .card,
+  .panel {
+    border-radius: var(--radius-lg);
   }
 }
 

@@ -30,8 +30,17 @@ const Header = () => {
     const onKey = (e) => {
       if (e.key === 'Escape') setIsOpen(false)
     }
+    const onClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    document.addEventListener('pointerdown', onClickOutside)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.removeEventListener('pointerdown', onClickOutside)
+    }
   }, [isOpen])
 
   useEffect(() => {
@@ -96,6 +105,14 @@ const Header = () => {
               {item.label}
             </a>
           ))}
+          <div className="site-header__nav-extra">
+            <a className="button button--secondary" href="#contact" onClick={(e) => go(e, '#contact')}>
+              Hire me
+            </a>
+            <a className="button button--ghost" href={SITE.resume} target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}>
+              Resume
+            </a>
+          </div>
         </nav>
 
         <div className="site-header__actions">
