@@ -116,10 +116,10 @@ const Header = () => {
         </nav>
 
         <div className="site-header__actions">
-          <a className="button button--secondary site-header__hire" href="#contact" onClick={(e) => go(e, '#contact')}>
+          <a className="button button--primary site-header__hire" href="#contact" onClick={(e) => go(e, '#contact')}>
             Hire me
           </a>
-          <a className="button button--ghost site-header__resume" href={SITE.resume} target="_blank" rel="noopener noreferrer">
+          <a className="button button--secondary site-header__resume" href={SITE.resume} target="_blank" rel="noopener noreferrer">
             Resume
           </a>
           <button

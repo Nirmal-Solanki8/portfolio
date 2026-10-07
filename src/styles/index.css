@@ -50,8 +50,8 @@
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  --font-display: 'Cabinet Grotesk', 'Inter', system-ui, sans-serif;
-  --font-body: 'General Sans', 'Inter', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', 'Cabinet Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'General Sans', 'Inter', system-ui, -apple-system, sans-serif;
   --content: 1160px;
   --grid-line: rgba(31, 27, 23, 0.06);
   --header-offset: 5.5rem;

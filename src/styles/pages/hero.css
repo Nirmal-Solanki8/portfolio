@@ -484,28 +484,77 @@
 
 @media (max-width: 1024px) {
   .hero-shell {
-    grid-template-columns: 1fr;
-    gap: clamp(var(--space-4), 4vw, var(--space-6));
-    padding: clamp(var(--space-4), 4vw, var(--space-6));
+    display: flex;
+    flex-direction: column;
+    gap: clamp(var(--space-5), 4vw, var(--space-7));
+    padding: clamp(var(--space-5), 4vw, var(--space-7));
+  }
+
+  .hero-side {
+    order: -1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .hero-copy {
-    padding: clamp(var(--space-2), 2vw, var(--space-4)) 0;
+    order: 1;
+    padding: 0;
     border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-badge {
+    margin-inline: auto;
+  }
+
+  .hero-copy h1 {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero-copy .hero-lead {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero-stack {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .stats-row {
+    width: 100%;
   }
 
   .profile-card {
-    padding: 0 0 clamp(var(--space-2), 2vw, var(--space-3));
+    padding: 0;
+    width: 100%;
   }
 
   .photo-frame {
-    max-width: min(100%, 19rem);
+    max-width: min(100%, 15.5rem);
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-xl);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--hero-glow) 35%, transparent),
+      0 16px 40px -10px rgba(0, 0, 0, 0.55),
+      0 0 35px -10px color-mix(in srgb, var(--hero-glow) 25%, transparent);
   }
 }
 
 @media (max-width: 720px) {
   .hero {
-    padding-top: clamp(5.2rem, 14vw, 6.2rem);
+    padding-top: clamp(5rem, 13vw, 6.2rem);
     padding-bottom: clamp(var(--space-10), 8vw, var(--space-16));
   }
 
@@ -515,13 +564,15 @@
     opacity: 0.22;
   }
 
+  .photo-frame {
+    max-width: min(100%, 13.5rem);
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-xl);
+  }
+
   .stats-row {
     grid-template-columns: 1fr;
     gap: var(--space-2);
-  }
-
-  .photo-frame {
-    max-width: min(100%, 16rem);
   }
 
   .hero-actions {
@@ -539,13 +590,14 @@
     display: none;
   }
 
-  .hero-actions .button {
-    flex: 1 1 auto;
+  .photo-frame {
+    max-width: min(100%, 12rem);
+    aspect-ratio: 1 / 1;
+    border-radius: 1.3rem;
   }
 
-  .photo-frame {
-    max-width: min(100%, 13.5rem);
-    border-radius: var(--radius-lg);
+  .hero-actions .button {
+    flex: 1 1 auto;
   }
 
   .stat {
