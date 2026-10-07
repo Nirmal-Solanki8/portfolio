@@ -43,37 +43,82 @@ const Header = () => {
     }
   }, [isOpen])
 
+  const clickLockRef = useRef(0)
+
   useEffect(() => {
-    const elements = NAV_LINKS.map((item) => document.getElementById(item.hash)).filter(Boolean)
-    if (!elements.length) return undefined
+    const updateActive = () => {
+      if (Date.now() < clickLockRef.current) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting)
-        if (!visible.length) return
-        const pick = visible.reduce((a, b) => (a.intersectionRatio >= b.intersectionRatio ? a : b))
-        setActiveHash(pick.target.id)
-      },
-      { threshold: [0, 0.08, 0.15, 0.22, 0.32, 0.45, 0.6], rootMargin: '-36% 0px -36% 0px' },
-    )
+      const scrollY = window.scrollY
+      const winHeight = window.innerHeight
+      const docHeight = document.documentElement.scrollHeight
 
-    elements.forEach((el) => observer.observe(el))
+      // Near top of page -> clear active hash
+      if (scrollY < 120) {
+        setActiveHash('')
+        return
+      }
 
-    const onScroll = () => {
-      if (window.scrollY < 80) setActiveHash('')
+      // If scrolled near bottom of document (within 350px) -> always activate contact
+      if (scrollY + winHeight >= docHeight - 350) {
+        setActiveHash('contact')
+        return
+      }
+
+      // Calculate visible viewport overlap of each section
+      const headerOffset = 90
+      let maxOverlap = 0
+      let bestHash = ''
+
+      for (const item of NAV_LINKS) {
+        const el = document.getElementById(item.hash)
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        const visibleTop = Math.max(rect.top, headerOffset)
+        const visibleBottom = Math.min(rect.bottom, winHeight)
+        const overlap = Math.max(0, visibleBottom - visibleTop)
+
+        if (overlap > maxOverlap) {
+          maxOverlap = overlap
+          bestHash = item.hash
+        }
+      }
+
+      if (bestHash && maxOverlap > 70) {
+        setActiveHash(bestHash)
+      }
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
+
+    const onHashChange = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (NAV_LINKS.some((n) => n.hash === hash)) {
+        setActiveHash(hash)
+      }
+    }
+
+    updateActive()
+    window.addEventListener('scroll', updateActive, { passive: true })
+    window.addEventListener('resize', updateActive, { passive: true })
+    window.addEventListener('hashchange', onHashChange)
 
     return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('scroll', updateActive)
+      window.removeEventListener('resize', updateActive)
+      window.removeEventListener('hashchange', onHashChange)
     }
   }, [])
 
   const go = (e, hash) => {
     e.preventDefault()
     scrollToHash(hash)
+    const id = hash.replace('#', '')
+    if (id && id !== 'top') {
+      setActiveHash(id)
+      clickLockRef.current = Date.now() + 850
+    } else {
+      setActiveHash('')
+      clickLockRef.current = Date.now() + 850
+    }
     setIsOpen(false)
   }
 
