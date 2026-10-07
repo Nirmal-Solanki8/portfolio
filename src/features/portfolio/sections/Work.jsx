@@ -37,10 +37,7 @@ const Work = () => {
               </a>
             </div>
             <div className="work-actions">
-              <a href={featured.sourceLink} className="button button--secondary" target="_blank" rel="noopener noreferrer">
-                Source Code
-              </a>
-              <a href={featured.liveLink} className="button button--ghost" target="_blank" rel="noopener noreferrer">
+              <a href={featured.liveLink} className="button button--primary" target="_blank" rel="noopener noreferrer">
                 Live demo
               </a>
             </div>
@@ -57,18 +54,11 @@ const Work = () => {
                     <span key={t}>{t}</span>
                   ))}
                 </div>
-                {p.liveLink || p.sourceLink ? (
+                {p.liveLink ? (
                   <div className="small-work-actions">
-                    {p.sourceLink ? (
-                      <a href={p.sourceLink} className="button button--secondary" target="_blank" rel="noopener noreferrer">
-                        Source Code
-                      </a>
-                    ) : null}
-                    {p.liveLink ? (
-                      <a href={p.liveLink} className="button button--ghost" target="_blank" rel="noopener noreferrer">
-                        Live demo
-                      </a>
-                    ) : null}
+                    <a href={p.liveLink} className="button button--primary" target="_blank" rel="noopener noreferrer">
+                      Live demo
+                    </a>
                   </div>
                 ) : null}
               </article>

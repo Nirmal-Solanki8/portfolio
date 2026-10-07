@@ -232,19 +232,31 @@ button {
 }
 
 .section {
-  padding: clamp(var(--space-12), 6.5vw, var(--space-20)) 0;
+  padding: clamp(2rem, 3.8vw, 3.25rem) 0;
   position: relative;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: clamp(1.75rem, 3.2vw, 2.5rem) 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding: clamp(1.35rem, 2.8vw, 2rem) 0;
+  }
 }
 
 .section::before {
   content: '';
   position: absolute;
-  top: calc(var(--space-8) * -1);
+  top: 0;
   left: 50%;
   width: min(90%, 560px);
   height: 56px;
-  transform: translateX(-50%);
-  opacity: 0.26;
+  transform: translate(-50%, -50%);
+  opacity: 0.22;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='56' viewBox='0 0 560 56'%3E%3Cpath d='M0 28h170c40 0 40-22 80-22h60c40 0 40 22 80 22h170' fill='none' stroke='%238f9daa' stroke-opacity='0.45' stroke-width='1.2'/%3E%3Ccircle cx='280' cy='28' r='3.6' fill='%236fd0d7' fill-opacity='0.7'/%3E%3C/svg%3E");
   background-size: contain;

@@ -5,13 +5,13 @@
 }
 
 .contact-card {
-  padding: var(--space-6);
+  padding: clamp(1.2rem, 2.5vw, 1.75rem);
 }
 
 .contact-layout {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
-  gap: var(--space-6);
+  gap: clamp(1.25rem, 3vw, 2rem);
   align-items: start;
 }
 

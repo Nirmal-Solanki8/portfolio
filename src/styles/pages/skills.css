@@ -8,7 +8,7 @@
 .skills-panel {
   display: flex;
   flex-direction: column;
-  padding: var(--space-5);
+  padding: clamp(1rem, 2vw, 1.35rem);
 }
 
 .skills-panel h3 {

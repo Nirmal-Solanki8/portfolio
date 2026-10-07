@@ -7,7 +7,7 @@
 
 .story,
 .timeline-card {
-  padding: var(--space-5);
+  padding: clamp(1rem, 2vw, 1.35rem);
 }
 
 .story h2 {

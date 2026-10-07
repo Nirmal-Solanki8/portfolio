@@ -7,7 +7,7 @@
 
 .featured-work,
 .small-work {
-  padding: var(--space-5);
+  padding: clamp(1rem, 2.2vw, 1.35rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

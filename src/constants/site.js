@@ -8,12 +8,8 @@ export const SITE = {
   },
   role: 'Web Developer',
   email: 'nirmalsolanki1432@gmail.com',
-  github: 'https://github.com/dashboard',
+  github: 'https://github.com/Nirmal-Solanki8',
   linkedin: 'https://www.linkedin.com/in/nirmal-solanki-b222b537a',
-  instagram: 'https://instagram.com/',
-  facebook: 'https://facebook.com/',
-  x: 'https://x.com/',
-  youtube: 'https://youtube.com/',
   resume: '/resume.pdf',
   heroHeadline: 'Designing and building modern, fast web experiences.',
   heroLead:
@@ -27,10 +23,6 @@ export const SITE = {
 export const SOCIAL_LINKS = [
   { label: 'GitHub', href: SITE.github },
   { label: 'LinkedIn', href: SITE.linkedin },
-  { label: 'Instagram', href: SITE.instagram },
-  { label: 'Facebook', href: SITE.facebook },
-  { label: 'X', href: SITE.x },
-  { label: 'YouTube', href: SITE.youtube },
 ]
 
 export const SKILLS = [
