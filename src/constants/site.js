@@ -21,7 +21,6 @@ export const SITE = {
 }
 
 export const SOCIAL_LINKS = [
-  { label: 'GitHub', href: SITE.github },
   { label: 'LinkedIn', href: SITE.linkedin },
 ]
 

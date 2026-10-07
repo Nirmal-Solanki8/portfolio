@@ -252,7 +252,6 @@
   box-shadow: 0 4px 14px -2px color-mix(in srgb, var(--color-primary) 25%, transparent);
 }
 
-.theme-toggle,
 .menu-toggle {
   width: 2.35rem;
   height: 2.35rem;
@@ -267,13 +266,11 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-[data-theme='light'] .theme-toggle,
 [data-theme='light'] .menu-toggle {
   border-color: rgba(15, 23, 42, 0.12);
   background: rgba(15, 23, 42, 0.04);
 }
 
-.theme-toggle:hover,
 .menu-toggle:hover {
   transform: translateY(-2px) scale(1.05);
   border-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-border));
@@ -408,7 +405,6 @@
     font-size: 1.02rem;
   }
 
-  .theme-toggle,
   .menu-toggle {
     width: 2.3rem;
     height: 2.3rem;

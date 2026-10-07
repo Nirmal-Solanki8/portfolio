@@ -98,31 +98,6 @@
   margin-top: var(--space-4);
 }
 
-.contact-socials {
-  margin-top: var(--space-3);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.contact-socials a {
-  padding: 0.38rem 0.68rem;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-size: var(--text-xs);
-  transition:
-    color 0.2s var(--ease-smooth),
-    border-color 0.2s var(--ease-smooth),
-    background 0.2s var(--ease-smooth);
-}
-
-.contact-socials a:hover {
-  color: var(--color-primary);
-  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
-  background: color-mix(in srgb, var(--color-primary-soft) 45%, transparent);
-}
-
 @media (max-width: 1024px) {
   .contact-layout {
     grid-template-columns: 1fr;

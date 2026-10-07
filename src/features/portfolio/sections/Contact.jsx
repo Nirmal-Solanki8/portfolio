@@ -39,9 +39,6 @@ const Contact = () => {
                 Send your project details and I&apos;ll reply with the best approach.
               </p>
               <div className="contact-actions">
-                <a className="button button--secondary" href={SITE.github} target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
                 <a className="button button--secondary" href={SITE.linkedin} target="_blank" rel="noopener noreferrer">
                   LinkedIn
                 </a>
