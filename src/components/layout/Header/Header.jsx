@@ -44,46 +44,34 @@ const Header = () => {
   const clickLockRef = useRef(0)
 
   useEffect(() => {
-    const updateActive = () => {
-      if (Date.now() < clickLockRef.current) return
+    const sectionEls = NAV_LINKS.map((item) => document.getElementById(item.hash)).filter(Boolean)
+    if (sectionEls.length === 0) return
 
-      const scrollY = window.scrollY
-      const winHeight = window.innerHeight
-      const docHeight = document.documentElement.scrollHeight
-
-      // Near top of page -> clear active hash
-      if (scrollY < 120) {
-        setActiveHash('')
-        return
-      }
-
-      // If scrolled near bottom of document (within 350px) -> always activate contact
-      if (scrollY + winHeight >= docHeight - 350) {
-        setActiveHash('contact')
-        return
-      }
-
-      // Calculate visible viewport overlap of each section
-      const headerOffset = 90
-      let maxOverlap = 0
-      let bestHash = ''
-
-      for (const item of NAV_LINKS) {
-        const el = document.getElementById(item.hash)
-        if (!el) continue
-        const rect = el.getBoundingClientRect()
-        const visibleTop = Math.max(rect.top, headerOffset)
-        const visibleBottom = Math.min(rect.bottom, winHeight)
-        const overlap = Math.max(0, visibleBottom - visibleTop)
-
-        if (overlap > maxOverlap) {
-          maxOverlap = overlap
-          bestHash = item.hash
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (Date.now() < clickLockRef.current) return
+        if (window.scrollY < 120) {
+          setActiveHash('')
+          return
         }
-      }
 
-      if (bestHash && maxOverlap > 70) {
-        setActiveHash(bestHash)
+        const visible = entries.find((e) => e.isIntersecting)
+        if (visible) {
+          setActiveHash(visible.target.id)
+        }
+      },
+      {
+        rootMargin: '-15% 0px -45% 0px',
+        threshold: 0,
+      },
+    )
+
+    sectionEls.forEach((el) => observer.observe(el))
+
+    const handleScroll = () => {
+      if (Date.now() < clickLockRef.current) return
+      if (window.scrollY < 120) {
+        setActiveHash('')
       }
     }
 
@@ -94,14 +82,12 @@ const Header = () => {
       }
     }
 
-    updateActive()
-    window.addEventListener('scroll', updateActive, { passive: true })
-    window.addEventListener('resize', updateActive, { passive: true })
+    window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('hashchange', onHashChange)
 
     return () => {
-      window.removeEventListener('scroll', updateActive)
-      window.removeEventListener('resize', updateActive)
+      observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('hashchange', onHashChange)
     }
   }, [])

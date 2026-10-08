@@ -50,8 +50,8 @@
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-snappy: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  --font-display: 'Outfit', 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --content: 1160px;
   --grid-line: rgba(31, 27, 23, 0.06);
   --header-offset: 5.5rem;
@@ -183,7 +183,6 @@ body::after {
     radial-gradient(circle at 84% 10%, color-mix(in srgb, var(--color-blue) 18%, transparent), transparent 22%),
     radial-gradient(circle at 70% 78%, color-mix(in srgb, var(--color-primary) 14%, transparent), transparent 26%);
   opacity: 0.45;
-  animation: ambientShift 16s ease-in-out infinite alternate;
 }
 
 img,

@@ -23,7 +23,7 @@ const Hero = () => {
         <path d="M0 90C220 180 440 0 720 82C960 156 1180 36 1440 94V180H0Z" fill="var(--color-primary-soft)" />
       </svg>
       <div className="container hero-grid">
-        <article className="hero-shell" data-reveal>
+        <article className="hero-shell">
           <div className="hero-copy">
             <p className="hero-badge" role="group" aria-label="Role and availability">
               <span className="hero-badge__dot" aria-hidden="true" />
@@ -62,7 +62,7 @@ const Hero = () => {
             </div>
             <div className="stats-row">
               <div className="stat">
-                <strong>03+</strong>
+                <strong>04+</strong>
                 <span>Production-grade projects</span>
               </div>
               <div className="stat">
@@ -77,10 +77,13 @@ const Hero = () => {
               <div className="photo-frame">
                 <img
                   src={imgSrc}
+                  srcSet="/images/profile-sm.jpg 400w, /images/profile.jpg 640w"
+                  sizes="(max-width: 720px) 200px, 400px"
                   alt={`${SITE.name} — portrait`}
-                  width={640}
-                  height={800}
+                  width={400}
+                  height={600}
                   loading="eager"
+                  fetchPriority="high"
                   decoding="async"
                   onError={() => setImgSrc(PROFILE_IMAGE_FALLBACK)}
                 />

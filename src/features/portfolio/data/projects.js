@@ -32,4 +32,14 @@ export const PROJECTS = [
     sourceLink: 'https://github.com/Nirmal-Solanki8/Worklix-jobportal',
     category: 'Backend',
   },
+  {
+    id: 'chronicle-news-blog',
+    title: 'CHRONICLE – Real-Time News & Blog Platform.',
+    description:
+      'A responsive editorial news and blogging platform built with React 19 and Vite, featuring live global headlines via REST APIs, weather forecasting, an interactive calendar, and local persistence.',
+    tags: ['React', 'Vite', 'REST APIs', 'Axios', 'CSS3'],
+    liveLink: 'https://newsandblogs.vercel.app/',
+    sourceLink: 'https://github.com/Nirmal-Solanki8/newsandblogs',
+    category: 'Frontend',
+  },
 ]

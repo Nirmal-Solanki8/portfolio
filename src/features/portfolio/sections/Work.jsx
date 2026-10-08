@@ -31,6 +31,8 @@ const Work = () => {
                 <img
                   src={featured.imageUrl}
                   alt={featured.imageAlt}
+                  width={800}
+                  height={366}
                   loading="lazy"
                   decoding="async"
                 />
@@ -57,7 +59,7 @@ const Work = () => {
                 {p.liveLink ? (
                   <div className="small-work-actions">
                     <a href={p.liveLink} className="button button--primary" target="_blank" rel="noopener noreferrer">
-                      Live demo
+                      {p.liveLink.includes('github.com') ? 'View on GitHub' : 'Live demo'}
                     </a>
                   </div>
                 ) : null}
