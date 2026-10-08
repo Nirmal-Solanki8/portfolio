@@ -9,11 +9,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   plugins: [react()],
   build: {
+    target: 'es2020',
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks(id) {
           if (!id.includes('node_modules')) return undefined
-          if (id.includes('framer-motion')) return 'motion'
           if (id.includes('react-icons') || id.includes('lucide-react')) return 'icons'
           if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/')) return 'vendor'
           return undefined

@@ -16,8 +16,25 @@ const Header = () => {
     return () => document.body.classList.remove('nav-open')
   }, [isOpen])
 
+  const clickLockRef = useRef(0)
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10)
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isPastThreshold = window.scrollY > 10
+          setScrolled((prev) => (prev !== isPastThreshold ? isPastThreshold : prev))
+
+          if (Date.now() >= clickLockRef.current && window.scrollY < 120) {
+            setActiveHash((prev) => (prev !== '' ? '' : prev))
+          }
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -41,8 +58,6 @@ const Header = () => {
     }
   }, [isOpen])
 
-  const clickLockRef = useRef(0)
-
   useEffect(() => {
     const sectionEls = NAV_LINKS.map((item) => document.getElementById(item.hash)).filter(Boolean)
     if (sectionEls.length === 0) return
@@ -51,13 +66,13 @@ const Header = () => {
       (entries) => {
         if (Date.now() < clickLockRef.current) return
         if (window.scrollY < 120) {
-          setActiveHash('')
+          setActiveHash((prev) => (prev !== '' ? '' : prev))
           return
         }
 
         const visible = entries.find((e) => e.isIntersecting)
         if (visible) {
-          setActiveHash(visible.target.id)
+          setActiveHash((prev) => (prev !== visible.target.id ? visible.target.id : prev))
         }
       },
       {
@@ -68,13 +83,6 @@ const Header = () => {
 
     sectionEls.forEach((el) => observer.observe(el))
 
-    const handleScroll = () => {
-      if (Date.now() < clickLockRef.current) return
-      if (window.scrollY < 120) {
-        setActiveHash('')
-      }
-    }
-
     const onHashChange = () => {
       const hash = window.location.hash.replace('#', '')
       if (NAV_LINKS.some((n) => n.hash === hash)) {
@@ -82,12 +90,10 @@ const Header = () => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('hashchange', onHashChange)
 
     return () => {
       observer.disconnect()
-      window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('hashchange', onHashChange)
     }
   }, [])

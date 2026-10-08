@@ -27,8 +27,15 @@ export function useRevealRoot() {
 
     observeAll()
 
+    let scheduled = false
     const mutationObserver = new MutationObserver(() => {
-      observeAll()
+      if (!scheduled) {
+        scheduled = true
+        requestAnimationFrame(() => {
+          observeAll()
+          scheduled = false
+        })
+      }
     })
 
     mutationObserver.observe(root, { childList: true, subtree: true })
