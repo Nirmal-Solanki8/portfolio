@@ -8,7 +8,6 @@ export function useRevealRoot() {
     const root = ref.current
     if (!root) return
 
-    const els = root.querySelectorAll('[data-reveal]')
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -21,8 +20,23 @@ export function useRevealRoot() {
       { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
     )
 
-    els.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    const observeAll = () => {
+      const els = root.querySelectorAll('[data-reveal]:not(.visible)')
+      els.forEach((el) => observer.observe(el))
+    }
+
+    observeAll()
+
+    const mutationObserver = new MutationObserver(() => {
+      observeAll()
+    })
+
+    mutationObserver.observe(root, { childList: true, subtree: true })
+
+    return () => {
+      observer.disconnect()
+      mutationObserver.disconnect()
+    }
   }, [])
 
   return ref
