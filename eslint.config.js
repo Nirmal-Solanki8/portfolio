@@ -7,7 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   globalIgnores(['dist', 'node_modules']),
   {
-    files: ['server/**/*.mjs'],
+    files: ['server/**/*.mjs', 'api/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',

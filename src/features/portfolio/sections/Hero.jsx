@@ -7,20 +7,14 @@ const Hero = () => {
   const [imgSrc, setImgSrc] = useState(PROFILE_IMAGE_SRC)
 
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section className="hero" id="home" aria-labelledby="hero-title">
       <svg className="hero-orbit" viewBox="0 0 600 320" fill="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="heroOrbitStroke" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="var(--color-blue)" stopOpacity="0.05" />
-          </linearGradient>
-        </defs>
-        <path d="M30 250C150 90 340 20 570 78" stroke="url(#heroOrbitStroke)" strokeWidth="1.4" />
-        <path d="M6 286C170 110 372 60 594 122" stroke="url(#heroOrbitStroke)" strokeWidth="0.8" />
-        <circle cx="118" cy="210" r="6.5" fill="var(--color-primary)" fillOpacity="0.35" />
+        <path className="hero-orbit__path-1" d="M30 250C150 90 340 20 570 78" />
+        <path className="hero-orbit__path-2" d="M6 286C170 110 372 60 594 122" />
+        <circle className="hero-orbit__dot" cx="118" cy="210" r="6" />
       </svg>
       <svg className="hero-wave" viewBox="0 0 1440 180" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 90C220 180 440 0 720 82C960 156 1180 36 1440 94V180H0Z" fill="var(--color-primary-soft)" />
+        <path className="hero-wave__path" d="M0 90C220 180 440 0 720 82C960 156 1180 36 1440 94V180H0Z" />
       </svg>
       <div className="container hero-grid">
         <article className="hero-shell">
@@ -31,7 +25,10 @@ const Hero = () => {
               <span className="hero-badge__divider" aria-hidden="true" />
               <span className="hero-badge__status">Open to opportunities</span>
             </p>
-            <h1 id="hero-title">{SITE.heroHeadline}</h1>
+            <h1 id="hero-title" className="hero-title">
+              <span className="hero-title__prefix">Designing and building</span>{' '}
+              <span className="hero-title__accent">modern, fast web experiences.</span>
+            </h1>
             <p className="hero-lead">{SITE.heroLead}</p>
             <p className="hero-stack">{SITE.heroStack}</p>
             <div className="hero-actions">
@@ -77,8 +74,6 @@ const Hero = () => {
               <div className="photo-frame">
                 <img
                   src={imgSrc}
-                  srcSet="/images/profile-sm.jpg 400w, /images/profile.jpg 640w"
-                  sizes="(max-width: 720px) 200px, 400px"
                   alt={`${SITE.name} — portrait`}
                   width={400}
                   height={600}

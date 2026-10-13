@@ -1,4 +1,4 @@
-export const PROFILE_IMAGE_SRC = '/images/profile.jpg'
+export const PROFILE_IMAGE_SRC = '/images/profile-sm.png'
 export const PROFILE_IMAGE_FALLBACK = '/images/profile-placeholder.svg'
 
 export const SITE = {
@@ -15,13 +15,14 @@ export const SITE = {
   heroLead:
     "I'm a web developer focused on React, JavaScript, Node.js, and responsive UI. I build websites and web apps that are clean, performant, and production-ready.",
   heroStack: 'React · Node.js · Express · MongoDB',
-  aboutTitle: 'A web developer focused on useful products and polished UI.',
+  aboutTitle: 'Engineering web solutions with a product-first mindset.',
   aboutBody:
-    'My core skills are HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and REST APIs. I focus on clean architecture, responsive design, and reliable user experience.',
+    'I build web applications by dissecting the underlying product problem. From fluid React interfaces to resilient Node.js and MongoDB backends, I prioritize clean architecture, intuitive UX, and long-term maintainability.',
 }
 
 export const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: SITE.linkedin },
+  { label: 'Email', href: `mailto:${SITE.email}` },
 ]
 
 export const SKILLS = [

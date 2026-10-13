@@ -2,19 +2,19 @@ export const SKILL_GROUPS = [
   {
     id: 'frontend',
     title: 'Frontend',
-    summary: 'Responsive interfaces with clean structure, hierarchy, and motion that feels intentional.',
-    skills: ['HTML5', 'CSS3', 'JavaScript', 'React.js'],
+    summary: 'Responsive, component-driven user interfaces with clean structure, fluid styling, and mobile-first UX.',
+    skills: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Responsive UI'],
   },
   {
     id: 'backend',
     title: 'Backend',
-    summary: 'APIs and server logic that stay predictable, maintainable, and ready for real products.',
+    summary: 'Scalable server-side logic, modular RESTful APIs, and reliable request middleware.',
     skills: ['Node.js', 'Express.js', 'REST APIs'],
   },
   {
-    id: 'data',
-    title: 'Data & delivery',
-    summary: 'Persistent data and UI systems that hold up across devices, not just desktop mockups.',
-    skills: ['MongoDB', 'Responsive UI'],
+    id: 'database-tools',
+    title: 'Database & Tools',
+    summary: 'Document-based NoSQL database modeling, API testing workflows, and fast frontend tooling.',
+    skills: ['MongoDB', 'Postman', 'Vite'],
   },
 ]

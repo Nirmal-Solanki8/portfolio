@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '@/constants/nav'
 import { SITE } from '@/constants/site'
 import BrandMark from '@/components/layout/BrandMark'
@@ -164,9 +165,7 @@ const Header = () => {
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             onClick={toggleMenu}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
+            {isOpen ? <X size={20} strokeWidth={2.2} /> : <Menu size={20} strokeWidth={2.2} />}
           </button>
         </div>
       </div>

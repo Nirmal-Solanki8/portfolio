@@ -1,22 +1,27 @@
 import { useEffect, useState } from 'react'
 import { ThemeContext } from '@/context/theme-context'
 
-function getInitialTheme() {
+function getSystemTheme() {
   if (typeof window === 'undefined') return 'dark'
-  const saved = localStorage.getItem('portfolio-theme')
-  if (saved === 'light' || saved === 'dark') return saved
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(getInitialTheme)
+  const [theme, setTheme] = useState(getSystemTheme)
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('portfolio-theme', theme)
-  }, [theme])
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const updateTheme = () => {
+      const current = mediaQuery.matches ? 'dark' : 'light'
+      setTheme(current)
+      document.documentElement.dataset.theme = current
+    }
 
-  const toggle = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
+    updateTheme()
 
-  return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>
+    mediaQuery.addEventListener('change', updateTheme)
+    return () => mediaQuery.removeEventListener('change', updateTheme)
+  }, [])
+
+  return <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Send } from 'lucide-react'
 import { postContact } from '@/lib/api'
 import { SITE } from '@/constants/site'
 
@@ -23,7 +24,11 @@ const Contact = () => {
       form.reset()
     } catch (err) {
       setStatus('idle')
-      setError(err instanceof Error ? err.message : 'Something went wrong.')
+      setError(
+        err instanceof Error && err.message !== 'Failed to fetch'
+          ? err.message
+          : 'Unable to send message right now. Please try again later.'
+      )
     }
   }
 
@@ -51,28 +56,62 @@ const Contact = () => {
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="field">
                 <label htmlFor="contact-name">Name</label>
-                <input id="contact-name" name="name" type="text" autoComplete="name" required placeholder="Your name" />
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  placeholder="Your name"
+                />
               </div>
               <div className="field">
                 <label htmlFor="contact-email">Email</label>
-                <input id="contact-email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  placeholder="you@example.com"
+                />
               </div>
               <div className="field">
                 <label htmlFor="contact-message">Message</label>
-                <textarea id="contact-message" name="message" rows={4} required placeholder="Project, role, or question" />
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  required
+                  placeholder="Project, role, or question"
+                />
               </div>
+
               {error ? (
                 <p className="feedback-err" role="alert">
                   {error}
                 </p>
               ) : null}
+
               {status === 'success' ? (
                 <p className="feedback-ok" role="status">
                   Message received — I&apos;ll get back to you soon.
                 </p>
               ) : null}
-              <button type="submit" className="btn primary contact-submit" disabled={status === 'sending'}>
-                {status === 'sending' ? 'Sending…' : 'Send message'}
+
+              <button
+                type="submit"
+                className="button button--primary contact-submit"
+                disabled={status === 'sending'}
+              >
+                {status === 'sending' ? (
+                  'Sending…'
+                ) : (
+                  <>
+                    <span>Send message</span>
+                    <Send size={15} aria-hidden />
+                  </>
+                )}
               </button>
             </form>
           </div>

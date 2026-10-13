@@ -9,8 +9,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export default defineConfig({
   plugins: [react()],
   build: {
-    target: 'es2020',
+    target: 'es2022',
     cssCodeSplit: true,
+    cssMinify: true,
     rollupOptions: {
       output: {
         manualChunks(id) {

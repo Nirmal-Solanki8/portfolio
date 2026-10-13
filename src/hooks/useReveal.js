@@ -1,12 +1,18 @@
 import { useEffect, useRef } from 'react'
 
-/** Attach ref to a container; all `[data-reveal]` descendants get `.visible` when scrolled in. */
+/** Attach ref to a container; all `[data-reveal]` descendants get `.visible` when scrolled near. */
 export function useRevealRoot() {
   const ref = useRef(null)
 
   useEffect(() => {
     const root = ref.current
     if (!root) return
+
+    // Immediate reveal if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      root.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('visible'))
+      return
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -17,25 +23,26 @@ export function useRevealRoot() {
           }
         })
       },
-      { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
+      { threshold: 0, rootMargin: '120px 0px 40px 0px' },
     )
 
-    const observeAll = () => {
+    const observeElements = () => {
       const els = root.querySelectorAll('[data-reveal]:not(.visible)')
-      els.forEach((el) => observer.observe(el))
+      const vh = window.innerHeight || document.documentElement.clientHeight || 800
+      els.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        if (rect.top < vh + 100 && rect.bottom > -50) {
+          el.classList.add('visible')
+        } else {
+          observer.observe(el)
+        }
+      })
     }
 
-    observeAll()
+    observeElements()
 
-    let scheduled = false
     const mutationObserver = new MutationObserver(() => {
-      if (!scheduled) {
-        scheduled = true
-        requestAnimationFrame(() => {
-          observeAll()
-          scheduled = false
-        })
-      }
+      observeElements()
     })
 
     mutationObserver.observe(root, { childList: true, subtree: true })

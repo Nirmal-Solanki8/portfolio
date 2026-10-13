@@ -103,8 +103,6 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
-  will-change: transform;
-  transform: translateZ(0);
   transition:
     transform 0.32s var(--ease-smooth),
     border-color 0.3s ease,
@@ -184,10 +182,13 @@
 }
 
 @keyframes projectPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.45;
     transform: scale(0.85);
@@ -375,29 +376,56 @@
 .project-card__actions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding-top: var(--space-2);
+  padding-top: var(--space-3);
   border-top: 1px solid var(--color-divider);
+  margin-top: auto;
 }
 
 .project-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  padding: 0.55rem 1.15rem;
-  font-size: var(--text-xs);
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.7rem 1.35rem;
+  font-size: var(--text-sm);
   font-weight: 600;
+  letter-spacing: -0.01em;
   border-radius: var(--radius-full);
   text-decoration: none;
-  transition: all 0.25s var(--ease-smooth);
-  flex: 1 1 0;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-blue));
+  color: var(--color-text-inverse);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--color-primary) 22%, transparent);
+  transition:
+    transform 0.25s var(--ease-smooth),
+    box-shadow 0.25s var(--ease-smooth),
+    filter 0.2s ease;
+  position: relative;
+  overflow: hidden;
   text-align: center;
   white-space: nowrap;
 }
 
-.project-action-btn svg {
+.project-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 24px -2px color-mix(in srgb, var(--color-primary) 36%, transparent),
+    0 0 16px -2px color-mix(in srgb, var(--color-blue) 28%, transparent);
+  filter: brightness(1.05);
+}
+
+.project-action-btn:active {
+  transform: translateY(0) scale(0.985);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.project-action-btn__icon {
   flex-shrink: 0;
+  transition: transform 0.22s var(--ease-smooth);
+}
+
+.project-action-btn:hover .project-action-btn__icon {
+  transform: translate(2px, -2px);
 }
 
 /* Responsive adjustments */
@@ -420,18 +448,26 @@
   }
 
   .project-card__actions {
-    flex-direction: column;
-    gap: var(--space-2);
+    padding-top: var(--space-2);
   }
 
   .project-action-btn {
     width: 100%;
-    flex: none;
+    padding: 0.62rem 1.1rem;
+    font-size: 0.825rem;
   }
 
   .work-filter-bar {
     width: 100%;
+    max-width: 100%;
     overflow-x: auto;
     padding: 0.25rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+
+  .work-filter-bar::-webkit-scrollbar {
+    display: none;
   }
 }

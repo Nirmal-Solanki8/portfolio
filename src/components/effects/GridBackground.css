@@ -1,0 +1,110 @@
+/* Animated 40x40 SVG Grid Background */
+.site-grid-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.22;
+  color: rgba(240, 236, 230, 0.16);
+  mask-image: radial-gradient(ellipse 90% 85% at 50% 20%, #000 35%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 20%, #000 35%, transparent 95%);
+  transform: translateZ(0);
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+[data-theme='light'] .site-grid-bg {
+  color: rgba(15, 23, 42, 0.12);
+  opacity: 0.28;
+}
+
+/* Seamless infinite gliding drift of the 40x40 grid */
+.site-grid-svg {
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  width: calc(100% + 80px);
+  height: calc(100% + 80px);
+  animation: gridDrift 28s linear infinite;
+  will-change: transform;
+}
+
+@keyframes gridDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(40px, 40px, 0);
+  }
+}
+
+/* Glowing accent cells that pulse softly across the grid */
+.grid-glow-cell {
+  fill: var(--color-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: gridCellPulse 7s ease-in-out infinite;
+}
+
+.grid-glow-cell--1 { animation-delay: 0s; }
+.grid-glow-cell--2 { animation-delay: 2.3s; }
+.grid-glow-cell--3 { animation-delay: 4.5s; }
+.grid-glow-cell--4 { animation-delay: 1.2s; }
+.grid-glow-cell--5 { animation-delay: 3.4s; }
+.grid-glow-cell--6 { animation-delay: 5.6s; }
+
+@keyframes gridCellPulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  35%, 65% {
+    opacity: 0.32;
+  }
+}
+
+/* Ambient radial glow beacon */
+.site-grid-radial-glow {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 850px);
+  height: min(70vh, 550px);
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--color-primary) 18%, transparent) 0%,
+    color-mix(in srgb, var(--color-blue) 10%, transparent) 45%,
+    transparent 72%
+  );
+  filter: blur(48px);
+  animation: gridAuraPulse 9s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes gridAuraPulse {
+  0% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+  100% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-grid-svg {
+    animation: none;
+    transform: none;
+  }
+
+  .grid-glow-cell {
+    animation: none;
+    opacity: 0.15;
+  }
+
+  .site-grid-radial-glow {
+    animation: none;
+  }
+}
